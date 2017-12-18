@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libsm6 libice6 
   && chmod +x qt.run \
   && sync \
   && ./qt.run --platform minimal --script qt-installer-noninteractive.qs -v \
+  && ln -s /opt/qt/5.9/gcc_64/bin/qmake /usr/bin/qmake \
   && rm -rf \
     qt.run \
     /var/lib/apt/lists/* \
