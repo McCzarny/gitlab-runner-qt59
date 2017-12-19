@@ -7,8 +7,8 @@ ADD qt-installer-noninteractive.qs .
 RUN wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
 && echo '\n\
 deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main\n\
-deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main \n\
-deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu trusty main' >> /etc/apt/sources.list \
+deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' >> /etc/apt/sources.list \
+&& sudo add-apt-repository ppa:ubuntu-toolchain-r/test \
 && sudo apt-key update && apt-get update && apt-get install -y --no-install-recommends libsm6 libice6 libxext6 libxrender1 libfontconfig1 libx11-xcb-dev build-essential clang libXrender1 libsm6 libfreetype6 libglib2.0-0 libglu1-mesa-dev \
   && curl -sSL https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run -o qt.run \
   && chmod +x qt.run \
