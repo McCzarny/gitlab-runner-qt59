@@ -4,7 +4,9 @@ ENV QMAKE=qmake
 ENV PATH="${PATH}:/opt/qt/5.9/gcc_64/bin/"
 ADD qt-installer-noninteractive.qs .
 
-RUN wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends software-properties-common \
+&& wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
 && echo '\n\
 deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main\n\
 deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' >> /etc/apt/sources.list \
