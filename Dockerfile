@@ -8,6 +8,7 @@ RUN apt-get update \
 && apt-get install -y --no-install-recommends software-properties-common \
 && wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
 && echo '\n\
+deb http://cz.archive.ubuntu.com/ubuntu bionic main universe \n\
 deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main\n\
 deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' >> /etc/apt/sources.list \
 && sudo add-apt-repository ppa:ubuntu-toolchain-r/test \
