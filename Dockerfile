@@ -4,7 +4,14 @@ ENV QMAKE=qmake
 ENV PATH="${PATH}:/opt/qt/5.9/gcc_64/bin/"
 ADD qt-installer-noninteractive.qs .
 
-RUN apt-get update && apt-get install -y --no-install-recommends libsm6 libice6 libxext6 libxrender1 libfontconfig1 libx11-xcb-dev build-essential libfontconfig1 libXrender1 libsm6 libfreetype6 libglib2.0-0 libglu1-mesa-dev \
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends software-properties-common \
+&& wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
+&& echo '\n\
+deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main\n\
+deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' >> /etc/apt/sources.list \
+&& sudo add-apt-repository ppa:ubuntu-toolchain-r/test \
+&& sudo apt-key update && apt-get update && apt-get install -y --no-install-recommends libsm6 libice6 libxext6 libxrender1 libfontconfig1 libx11-xcb-dev build-essential clang-5.0 clang-tidy-5.0 libXrender1 libsm6 libfreetype6 libglib2.0-0 libglu1-mesa-dev \
   && curl -sSL https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run -o qt.run \
   && chmod +x qt.run \
   && sync \
@@ -21,8 +28,3 @@ RUN apt-get update && apt-get install -y --no-install-recommends libsm6 libice6 
     /opt/qt/Docs \
     /opt/qt/network.xml \
     /opt/qt/Examples \
-&& curl -SL http://releases.llvm.org/5.0.0/clang+llvm-5.0.0-linux-x86_64-ubuntu16.04.tar.xz \
-   | tar -xJC . && \
-   mv clang+llvm-5.0.0-linux-x86_64-ubuntu16.04 clang_5.0.0 && \
-   echo 'export PATH=/clang_5.0.0/bin:$PATH' >> ~/.bashrc && \
-   echo 'export LD_LIBRARY_PATH=/clang_5.0.0/lib:LD_LIBRARY_PATH' >> ~/.bashrc
